@@ -32,8 +32,8 @@ public class PlayerController {
      */
     public String addPlayer(String name, int age, double height, double weight) {
         try {
-            
-            playerList.add(new Player(name, age, height, weight));
+            Player player = new Player(name, age, height, weight);
+            playerList.add(player);
             return "OK";
         }
         catch (Exception e) {
@@ -99,5 +99,9 @@ public class PlayerController {
         }
         
         return stadistics;
+    }
+    
+    public Player getLastPlayer () {
+        return playerList.get(playerList.size() - 1);
     }
 }

@@ -6,6 +6,8 @@
 package com.sv.udb.corto1.views;
 
 import com.sv.udb.corto1.classes.PlayerController;
+import com.sv.udb.corto1.classes.TeamController;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,14 +17,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    private PlayerController controller;
+    private PlayerController playerController;
+    private TeamController teamController;
     
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        controller = new PlayerController();
+        playerController = new PlayerController();
+        teamController = new TeamController();
         
         DefaultTableModel model = new DefaultTableModel();
         
@@ -44,6 +48,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        txtTeam = new javax.swing.JTextField();
+        btnAddTeam = new javax.swing.JButton();
         pnlAdd = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -54,6 +62,9 @@ public class MainFrame extends javax.swing.JFrame {
         txtHeight = new javax.swing.JTextField();
         txtWeight = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        cmbTeam = new javax.swing.JComboBox<>();
+        lblError = new javax.swing.JLabel();
         pnlRead = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -66,6 +77,43 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel8.setText("Nombre");
+
+        btnAddTeam.setText("Agregar");
+        btnAddTeam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTeamActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnAddTeam)))
+                .addContainerGap(296, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddTeam))
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Agregar equipos", jPanel1);
+
         jLabel1.setText("Nombre:");
 
         jLabel2.setText("Edad:");
@@ -75,35 +123,48 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4.setText("Peso:");
 
         btnAdd.setText("Agregar jugador");
+        btnAdd.setEnabled(false);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
 
+        jLabel9.setText("Equipo:");
+
+        cmbTeam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vacío" }));
+
+        lblError.setForeground(new java.awt.Color(255, 0, 0));
+        lblError.setText("Debe crear al menos un equipo para agregar jugadores");
+
         javax.swing.GroupLayout pnlAddLayout = new javax.swing.GroupLayout(pnlAdd);
         pnlAdd.setLayout(pnlAddLayout);
         pnlAddLayout.setHorizontalGroup(
             pnlAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAddLayout.createSequentialGroup()
-                .addGap(85, 85, 85)
                 .addGroup(pnlAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlAddLayout.createSequentialGroup()
+                        .addGap(85, 85, 85)
                         .addGroup(pnlAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(36, 36, 36)
-                        .addGroup(pnlAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtWeight)
+                            .addComponent(txtHeight)
+                            .addComponent(txtAge)
+                            .addComponent(txtName)
+                            .addComponent(cmbTeam, 0, 129, Short.MAX_VALUE)))
                     .addGroup(pnlAddLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(btnAdd)))
-                .addContainerGap(103, Short.MAX_VALUE))
+                        .addGap(114, 114, 114)
+                        .addComponent(btnAdd))
+                    .addGroup(pnlAddLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(lblError)))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
         pnlAddLayout.setVerticalGroup(
             pnlAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,9 +185,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(pnlAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(cmbTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(lblError)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdd)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Agregar jugadores", pnlAdd);
@@ -205,7 +272,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,15 +285,27 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshView () {
+        
+        //Activando "agregar jugadores"
+        if (teamController.hasTeams()) {
+            lblError.setVisible(false);
+            btnAdd.setEnabled(true);
+        }
+        
         //Actualizando tabla
-        tblPlayers.setModel(controller.getPlayers());
+        tblPlayers.setModel(playerController.getPlayers());
         
         //Actualizando rankings
-        String[] stadistics = controller.getStadistics();
+        String[] stadistics = playerController.getStadistics();
         
         lblHighest.setText(stadistics[0]);
         lblYoungest.setText(stadistics[1]);
         lblHeaviest.setText(stadistics[2]);
+        
+        //Actualizando lista de equipos
+        DefaultComboBoxModel cmbModel = teamController.getTeams();
+        cmbTeam.setModel(cmbModel);
+        
     }
     
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -235,8 +314,9 @@ public class MainFrame extends javax.swing.JFrame {
             int age = Integer.parseInt(txtAge.getText().trim());
             double height = Double.parseDouble(txtHeight.getText().trim());
             double weight = Double.parseDouble(txtWeight.getText().trim());
+            Object team = cmbTeam.getSelectedItem();
             
-            String response = controller.addPlayer(name, age, height, weight);
+            String response = playerController.addPlayer(name, age, height, weight);
             String result = "";
             
             switch (response) {
@@ -261,6 +341,38 @@ public class MainFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnAddTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTeamActionPerformed
+        try {
+            String name = txtTeam.getText().trim();
+            
+            if (name.equals(""))
+                JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos con datos válidos.");
+            else{
+               
+                String response = teamController.addTeam(name);
+                String result = "";
+
+                switch (response) {
+                    case "OK":
+                        result = "Equipo añadido exitosamente";
+                        txtTeam.setText("");
+                        refreshView();
+                        break;
+                    case "ERROR":
+                        result = "Ocurrió un error.";
+                        break;
+                }
+
+                JOptionPane.showMessageDialog(this, result);
+            }
+            
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos con datos válidos.");
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnAddTeamActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,6 +411,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddTeam;
+    private javax.swing.JComboBox<String> cmbTeam;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -306,8 +420,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblError;
     private javax.swing.JLabel lblHeaviest;
     private javax.swing.JLabel lblHighest;
     private javax.swing.JLabel lblYoungest;
@@ -317,6 +435,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtHeight;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtTeam;
     private javax.swing.JTextField txtWeight;
     // End of variables declaration//GEN-END:variables
 }

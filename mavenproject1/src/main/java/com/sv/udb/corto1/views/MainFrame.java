@@ -5,7 +5,9 @@
  */
 package com.sv.udb.corto1.views;
 
+import com.sv.udb.corto1.classes.Player;
 import com.sv.udb.corto1.classes.PlayerController;
+import com.sv.udb.corto1.classes.Team;
 import com.sv.udb.corto1.classes.TeamController;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -36,6 +38,14 @@ public class MainFrame extends javax.swing.JFrame {
         model.addColumn("Peso");
         
         tblPlayers.setModel(model);
+        
+        model = new DefaultTableModel();
+        model.addColumn("Equipo 1");
+        tblTeam1.setModel(model);
+        
+        model = new DefaultTableModel();
+        model.addColumn("Equipo 2");
+        tblTeam2.setModel(model);
     }
 
     /**
@@ -74,6 +84,16 @@ public class MainFrame extends javax.swing.JFrame {
         lblHeaviest = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPlayers = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        cmbTeam1 = new javax.swing.JComboBox<>();
+        cmbTeam2 = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        btnPlay = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblTeam1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblTeam2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,7 +118,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(txtTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(btnAddTeam)))
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +129,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddTeam))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar equipos", jPanel1);
@@ -164,7 +184,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(pnlAddLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(lblError)))
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         pnlAddLayout.setVerticalGroup(
             pnlAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +209,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(pnlAddLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(cmbTeam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(lblError)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdd)
@@ -251,7 +271,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReadLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(pnlReadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(lblHighest))
@@ -268,11 +288,99 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Ver Estadísticas", pnlRead);
 
+        cmbTeam1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vacío" }));
+
+        cmbTeam2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vacío" }));
+
+        jLabel10.setText("Equipo 1");
+
+        jLabel11.setText("Equipo 2");
+
+        btnPlay.setText("Jugar partido");
+        btnPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayActionPerformed(evt);
+            }
+        });
+
+        tblTeam1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblTeam1);
+
+        tblTeam2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tblTeam2);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(btnPlay)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(cmbTeam1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(cmbTeam2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(166, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbTeam1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTeam2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPlay)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Jugar partido", jPanel2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,6 +413,10 @@ public class MainFrame extends javax.swing.JFrame {
         //Actualizando lista de equipos
         DefaultComboBoxModel cmbModel = teamController.getTeams();
         cmbTeam.setModel(cmbModel);
+        cmbModel = teamController.getTeams();
+        cmbTeam1.setModel(cmbModel);
+        cmbModel = teamController.getTeams();
+        cmbTeam2.setModel(cmbModel);
         
     }
     
@@ -314,24 +426,25 @@ public class MainFrame extends javax.swing.JFrame {
             int age = Integer.parseInt(txtAge.getText().trim());
             double height = Double.parseDouble(txtHeight.getText().trim());
             double weight = Double.parseDouble(txtWeight.getText().trim());
-            Object team = cmbTeam.getSelectedItem();
+            Team team = (Team) cmbTeam.getSelectedItem();
             
-            String response = playerController.addPlayer(name, age, height, weight);
+            //Añadiendo jugador a lista de jugadores
+            Player player = playerController.addPlayer(name, age, height, weight);
             String result = "";
             
-            switch (response) {
-                case "OK":
-                    result = "Jugador añadido exitosamente";
-                    txtName.setText("");
-                    txtAge.setText("");
-                    txtHeight.setText("");
-                    txtWeight.setText("");
-                    refreshView();
-                    break;
-                case "ERROR":
-                    result = "Ocurrió un error.";
-                    break;
+            if (player != null) {
+                //Añadiendo jugador a equipo
+                teamController.addPlayer(team, player);
+                
+                result = "Jugador añadido exitosamente";
+                txtName.setText("");
+                txtAge.setText("");
+                txtHeight.setText("");
+                txtWeight.setText("");
+                refreshView();
             }
+            else 
+                result = "Ocurrió un error.";
             
             JOptionPane.showMessageDialog(this, result);
             
@@ -374,6 +487,30 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAddTeamActionPerformed
 
+    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+        try {
+            
+            Team team1 = (Team)cmbTeam1.getSelectedItem();
+            Team team2 = (Team)cmbTeam2.getSelectedItem();
+
+            if (team1 == team2) 
+                JOptionPane.showMessageDialog(this, "Debe seleccionar dos equipos diferentes.");
+
+            else if (!teamController.hasPlayers(team1) || !teamController.hasPlayers(team2))
+                JOptionPane.showMessageDialog(this, "Debe seleccionar equipos con integrantes.");
+
+            else {
+                tblTeam1.setModel(teamController.getPlayers((Team)cmbTeam1.getSelectedItem()));
+                tblTeam2.setModel(teamController.getPlayers((Team)cmbTeam2.getSelectedItem()));
+                JOptionPane.showMessageDialog(this, "Partido realizado.");
+            }
+        }
+        
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No hay equipos registrados.");
+        }
+    }//GEN-LAST:event_btnPlayActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -412,8 +549,13 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAddTeam;
+    private javax.swing.JButton btnPlay;
     private javax.swing.JComboBox<String> cmbTeam;
+    private javax.swing.JComboBox<String> cmbTeam1;
+    private javax.swing.JComboBox<String> cmbTeam2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -423,7 +565,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblError;
     private javax.swing.JLabel lblHeaviest;
@@ -432,6 +577,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlAdd;
     private javax.swing.JPanel pnlRead;
     private javax.swing.JTable tblPlayers;
+    private javax.swing.JTable tblTeam1;
+    private javax.swing.JTable tblTeam2;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtHeight;
     private javax.swing.JTextField txtName;

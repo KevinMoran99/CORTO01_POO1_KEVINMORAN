@@ -30,17 +30,16 @@ public class PlayerController {
      * @param weight El peso del jugador.
      * @return "OK", si el jugador fue agregado exitosamente; ó "ERROR" si ocurre un error al realizar la operación.
      */
-    public String addPlayer(String name, int age, double height, double weight) {
+    public Player addPlayer(String name, int age, double height, double weight) {
+        Player player = null;
         try {
-            Player player = new Player(name, age, height, weight);
+            player = new Player(name, age, height, weight);
             playerList.add(player);
-            return "OK";
         }
         catch (Exception e) {
             e.printStackTrace();
-            return "ERROR";
-            
         }
+        return player;
     }
     
     /**
@@ -101,7 +100,4 @@ public class PlayerController {
         return stadistics;
     }
     
-    public Player getLastPlayer () {
-        return playerList.get(playerList.size() - 1);
-    }
 }

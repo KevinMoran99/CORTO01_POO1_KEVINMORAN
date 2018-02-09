@@ -7,6 +7,7 @@ package com.sv.udb.corto1.classes;
 
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,6 +42,10 @@ public class TeamController {
         return !teamList.isEmpty();
     }
     
+    public boolean hasPlayers (Team team) {
+        return !team.getPlayerList().isEmpty();
+    }
+    
     public DefaultComboBoxModel getTeams () {
         DefaultComboBoxModel teams = new DefaultComboBoxModel();
         
@@ -49,5 +54,18 @@ public class TeamController {
         }
         
         return teams;
+    }
+    
+    public DefaultTableModel getPlayers (Team team) {
+        
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.addColumn(team.getName());
+        
+        for (Player player : team.getPlayerList()) {
+            model.addRow(new Object[]{player.getName()});
+        }
+        
+        return model;
     }
 }
